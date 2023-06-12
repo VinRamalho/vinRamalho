@@ -4,19 +4,29 @@ const getUser = (req, res, next) => {
 
     const { name } = req.body;
 
+    let encontrado = false;
+    let resultado = []
+
     // acessando todos as pessoas do banco 
     data.forEach((obj) => {
 
         // separando cada nome composto
         obj.name.split(" ").forEach((nomeSeparado) => {
             if (nomeSeparado === name) {
-                // Case ache algum, retorna o objeto inteiro 
-                return res.send(obj);
+                encontrado = true;
+                // Case ache algum, insere no array 
+                resultado.push(obj)
             }
         })
 
-        res.send({ message: "usuario não encontrado" });
     })
+
+    // caso não encontre
+    if (!encontrado) {
+        res.send({ message: "usuario não encontrado" });
+    } else { // Caso encontre
+        res.send(resultado);
+    }
 
 };
 
