@@ -4,7 +4,6 @@ const getUser = (req, res, next) => {
 
     const { name } = req.body;
 
-
     // acessando todos as pessoas do banco 
     data.forEach((obj) => {
 
