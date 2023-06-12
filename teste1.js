@@ -16,12 +16,8 @@ const getUser = (req, res, next) => {
             if (nomeSeparado === name) {
                 encontrado = true;
 
-                // Fazendo contagem de leituras
-                if (!obj.read) {
-                    obj.read = 1;
-                } else {
-                    obj.read = obj.read + 1;
-                }
+                // Fazendo contagem de leituras com ternario
+                !obj.read ? obj.read = 1 : !obj.read++
 
                 // Case ache algum, insere no array
                 resultado.push(obj)
