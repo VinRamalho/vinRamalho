@@ -5,7 +5,8 @@ const getUser = (req, res, next) => {
     const { name } = req.body;
 
     let encontrado = false;
-    let resultado = []
+    let resultado = [];
+
 
     // acessando todos as pessoas do banco 
     data.forEach((obj) => {
@@ -14,7 +15,15 @@ const getUser = (req, res, next) => {
         obj.name.split(" ").forEach((nomeSeparado) => {
             if (nomeSeparado === name) {
                 encontrado = true;
-                // Case ache algum, insere no array 
+
+                // Fazendo contagem de leituras
+                if (!obj.read) {
+                    obj.read = 1;
+                } else {
+                    obj.read = obj.read + 1;
+                }
+
+                // Case ache algum, insere no array
                 resultado.push(obj)
             }
         })
