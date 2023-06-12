@@ -1,21 +1,30 @@
-var data =  require("./fakeData");
+const data = require("./fakeData");
 
-const getUser = ( req, res, next ) => {
-    
-    var name =  req.query.name;
+const getUser = (req, res, next) => {
 
-    for(let i = 0; i < data.length;  i++) {
-        if(i.name == name) {
-            res.send(data[i]);
-        }
-    }
+    const { name } = req.body;
+
+
+    // acessando todos as pessoas do banco 
+    data.forEach((obj) => {
+
+        // separando cada nome composto
+        obj.name.split(" ").forEach((nomeSeparado) => {
+            if (nomeSeparado === name) {
+                // Case ache algum, retorna o objeto inteiro 
+                return res.send(obj);
+            }
+        })
+
+        res.send({ message: "usuario não encontrado" });
+    })
 
 };
 
-const getUsers = ( req, res, next ) => {
-    
+const getUsers = (req, res, next) => {
+
     res.send(data);
-    
+
 };
 
 module.exports = {
