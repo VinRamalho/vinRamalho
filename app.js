@@ -1,18 +1,22 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
+const expressValidator = require('express-validator')
+
 
 const teste1 = require("./teste1");
 const teste2 = require("./teste2");
 const teste3 = require("./teste3");
 const teste4 = require("./teste4");
 const teste5 = require("./teste5");
+const { validate } = require('./validate');
 
 
 app.set('view engine', 'jade');
 
 app.use(express.json());
-app.use(express.urlencoded());
+app.use(express.urlencoded({ extended: true }));
+
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -31,8 +35,8 @@ app.get('/', function (req, res) {
 app.get("/user", teste1.getUser);
 app.get("/users", teste1.getUsers);
 app.post("/users", teste2)
-app.delete("/users", teste3)
-app.put("/users", teste4)
+app.delete("/users", validate('teste3'), teste3)
+app.put("/users", validate('teste4'), teste4)
 app.get("/users/access", teste5);
 
 

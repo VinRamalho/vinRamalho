@@ -26,7 +26,7 @@ module.exports = function (req, res) {
     if (!encontrado) {
         res.send({ message: "usuario não encontrado" });
     } else { // Caso encontre
-        res.send(`Usuário ${name} foi lido ${resultado[0].read} vezes.`);
+        res.send(`Usuário ${name} foi lido ${resultado[0].read} vez${resultado[0].read > 1 ? "es" : ""}.`);
 
     }
 
